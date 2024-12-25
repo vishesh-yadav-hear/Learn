@@ -10,14 +10,14 @@
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv('./learning_librery/pandas/projects/1/df.csv')
+data = pd.read_csv('./learning_librery/pandas/projects/1/student_data.csv')
 
 data_df = pd.DataFrame(data)
 
 data_df['Average'] = data_df[['English','Hindi','Maths','GK','Computer']].mean(axis=1)
 
 toper_st = data.loc[data_df['Average'].idxmax(), "Name"]
-toper_st = data.loc[data_df['Average'].idxmin(), "Name"]
+not_toper_st = data.loc[data_df['Average'].idxmin(), "Name"]
 
 def avreg(avg):
     if avg >= 90:
@@ -31,3 +31,7 @@ def avreg(avg):
 data_df['Grade'] = data_df['Average'].apply(avreg)
 
 print(data_df)
+print(f"Toper : {toper_st}")
+print(f"Losser : {not_toper_st}")
+
+data_df.to_csv('./learning_librery/pandas/projects/1/student_data_after_update.csv')
